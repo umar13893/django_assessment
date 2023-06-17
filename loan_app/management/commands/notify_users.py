@@ -12,7 +12,10 @@ class Command(BaseCommand):
             due_date__date=timezone.datetime.now() + timedelta(days=2),
             status='APPROVED',
         )
-        for loan in loans:
-            # Send reminder email to this email
-            user_email = loan.user_account.user.email
-        self.stdout.write(user_email)
+        if loans:
+            for loan in loans:
+                # Send reminder email to this email
+                user_email = loan.user_account.user.email
+                print(user_email)
+        else:
+            print("No loan users available to send reminders")
